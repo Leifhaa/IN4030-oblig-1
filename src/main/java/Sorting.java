@@ -16,15 +16,33 @@ public class Sorting {
         }
     }
 
+    /**
+     * Searches in a range of array for elements which is higher than the sortedFrom/sortedTo range. Adds such elements
+     * to the sorted range and resorts it
+     */
+    public static void searchAndResort(int sortedFrom, int sortedTo, int readFrom, int readTo, int[] searchResults) {
+        for (int i = readFrom; i < readTo - 1; i++) {
+            if (searchResults[i] > searchResults[readFrom - 1]) {
+                /* Found a number which is higher than our lowest */
+                int tmp = searchResults[readFrom - 1];
+                searchResults[readFrom - 1] = searchResults[i];
+                searchResults[i] = tmp;
+
+                /* Sort again */
+                Sorting.sortElementDesc(sortedFrom, searchResults, sortedTo);
+            }
+        }
+    }
+
 
     /**
      * Sorts element in descending order in array by using insertion sort
      * @param array The array which the element should be sorted in
      * @param index The current index of the element that should be sorted
      */
-    public static void sortElementDesc(int [] array, int index) {
+    public static void sortElementDesc(int sortedFrom, int[] array, int index) {
         int elementValue = array[index];
-        for (int i = index; i > 0; i--){
+        for (int i = index; i > sortedFrom; i--){
             if (elementValue > array[i - 1]){
                 int tmp = array[i - 1];
                 array [i - 1] = array[i];
@@ -35,5 +53,4 @@ public class Sorting {
             }
         }
     }
-
 }

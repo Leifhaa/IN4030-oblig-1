@@ -31,7 +31,7 @@ class Tests_Task1 {
     @Test
     void testSortingElement() {
         int[] arr = new int[]{6, 5, 4, 3, 2, 4};
-        Sorting.sortElementDesc(arr, 5);
+        Sorting.sortElementDesc(0,arr, 5);
 
         for (int i = 0; i < arr.length - 1; i++) {
             Assertions.assertTrue(arr[i] >= arr[i + 1]);
@@ -41,7 +41,7 @@ class Tests_Task1 {
     @Test
     void testSortingElementLastEqualToFirst() {
         int[] arr = new int[]{100, 5, 4, 3, 2, 100};
-        Sorting.sortElementDesc(arr, 5);
+        Sorting.sortElementDesc(0,arr,5);
 
         for (int i = 0; i < arr.length - 1; i++) {
             Assertions.assertTrue(arr[i] >= arr[i + 1]);
@@ -51,7 +51,7 @@ class Tests_Task1 {
     @Test
     void testSortingElementLastHigherThanFirst() {
         int[] arr = new int[]{100, 5, 4, 3, 2, 101};
-        Sorting.sortElementDesc(arr, 5);
+        Sorting.sortElementDesc(0, arr, 5);
 
         for (int i = 0; i < arr.length - 1; i++) {
             Assertions.assertTrue(arr[i] >= arr[i + 1]);

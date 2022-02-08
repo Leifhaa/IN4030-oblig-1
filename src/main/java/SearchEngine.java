@@ -1,5 +1,4 @@
 import java.util.Random;
-import java.util.concurrent.CyclicBarrier;
 
 public class SearchEngine {
 
@@ -34,17 +33,7 @@ public class SearchEngine {
 
 
         /* Compare lowest number with each element in the rest of the array*/
-        for (int i = k; i < n - 1; i++) {
-            if (searchResults[i] > searchResults[k - 1]) {
-                /* Found a number which is higher than our lowest */
-                int tmp = searchResults[k - 1];
-                searchResults[k - 1] = searchResults[i];
-                searchResults[i] = tmp;
-
-                /* Sort again */
-                Sorting.sortElementDesc(searchResults, k - 1);
-            }
-        }
+        Sorting.searchAndResort(0, k - 1, k, n, searchResults);
     }
 
     public void sortSearchResultsAsync(int[] searchResults, int k) {
@@ -56,10 +45,8 @@ public class SearchEngine {
         int elementsPerProcessor = arrayElements / numProcessors;
 
 
-
-
         for (int i = 0; i < numProcessors; i++) {
-            t[i] = new Thread(new Para(searchResults, k, k + elementsPerProcessor * i, elementsPerProcessor));
+            t[i] = new Thread(new SorterThread(searchResults, k, k + elementsPerProcessor * i, elementsPerProcessor));
             t[i].start();
         }
 
