@@ -29,8 +29,7 @@ public class ThreadWorker implements Runnable {
             Sorting.sortArrayDesc(searchResults, startIdx, k);
 
         /* Compare lowest number with each element in the rest of the array*/
-            Sorting.searchAndResort(startIdx, k - 1, k, endIdx, searchResults);
-
+            Sorting.searchAndResort(startIdx, k - 1, k, endIdx + 1, searchResults);
     }
 
 }

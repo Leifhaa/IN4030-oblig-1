@@ -22,10 +22,10 @@ public class Sorting {
      */
     public static void searchAndResort(int sortedFrom, int sortedTo, int readFrom, int readTo, int[] searchResults) {
         for (int i = readFrom; i < readTo - 1; i++) {
-            if (searchResults[i] > searchResults[readFrom - 1]) {
+            if (searchResults[i] > searchResults[sortedTo]) {
                 /* Found a number which is higher than our lowest */
-                int tmp = searchResults[readFrom - 1];
-                searchResults[readFrom - 1] = searchResults[i];
+                int tmp = searchResults[sortedTo];
+                searchResults[sortedTo] = searchResults[i];
                 searchResults[i] = tmp;
 
                 /* Sort again */

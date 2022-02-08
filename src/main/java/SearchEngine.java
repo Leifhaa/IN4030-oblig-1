@@ -48,10 +48,10 @@ public class SearchEngine {
         for (int i = 0; i < numProcessors; i++) {
             readFrom = elementsPerProcessor * i;
             readTo = readFrom + elementsPerProcessor;
-            if (i == numProcessors - 1){
+            if (i == numProcessors - 1) {
                 readTo = n;
             }
-            tw[i] = new ThreadWorker(searchResults, k, readFrom, readTo - 1);
+            tw[i] = new ThreadWorker(searchResults, k, readFrom, readTo);
             t[i] = new Thread(tw[i]);
             t[i].start();
 
@@ -69,9 +69,7 @@ public class SearchEngine {
 
         //All threads completed. Merge results for each sorting. Starting from thread 1, not 0 as thread 0 already has sorted it's elements from 0 to k
         for (int i = 1; i < tw.length; i++) {
-            for (int j = tw[i].getStartIdx(); j < tw[i].getEndIdx() - 1; j++) {
-                Sorting.searchAndResort(0, k - 1, tw[i].getStartIdx(), tw[i].getStartIdx() + k - 1, searchResults);
-            }
+            Sorting.searchAndResort(0, k - 1, tw[i].getStartIdx(), tw[i].getStartIdx() + k, searchResults);
         }
     }
 

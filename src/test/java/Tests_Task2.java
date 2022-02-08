@@ -14,10 +14,6 @@ public class Tests_Task2 {
         se.sortSearchResultsAsync(se.getSearchResults(), k);
 
         for (int i = k; i < nSearchResults; i++){
-            if (se.getSearchResult(k - 1) >= se.getSearchResult(i)){
-
-                System.out.println("HEERORAS");
-            }
             Assertions.assertTrue(se.getSearchResult(k - 1) >= se.getSearchResult(i));
         }
     }
