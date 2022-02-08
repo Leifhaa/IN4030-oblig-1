@@ -1,3 +1,5 @@
+package utils;
+
 public class TimeUsage {
 
     public TimeUsage() {
@@ -39,10 +41,9 @@ public class TimeUsage {
 
     @Override
     public String toString() {
-        return "TimeUsage{" +
+        return "Time usage for different algorithms: " +
                 "A1=" + A1 +
-                ", A2_K20=" + A2_K20 +
-                ", A2_K100=" + A2_K100 +
-                '}';
+                ", A2(K20) = " + A2_K20 +
+                ", A2(K100) = " + A2_K100 ;
     }
 }

@@ -1,10 +1,8 @@
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import utils.TimeUsage;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 
 class Tests_Task1 {
 
@@ -176,7 +174,7 @@ class Tests_Task1 {
         }
 
         for (int i = 0; i < timeUsages.length; i++){
-            System.out.println(timeUsages[i]);
+            System.out.println("Results for array size " + nSearchResults[i] + ": " + timeUsages[i]);
         }
     }
 
@@ -206,6 +204,7 @@ class Tests_Task1 {
             long time = System.nanoTime();
             Arrays.sort(searchResults);
 
+            /* Reversing the array so it's decending */
             int[] reversed = new int[searchResults.length];
             int j = searchResults.length;
             for (int searchResult : searchResults) {
