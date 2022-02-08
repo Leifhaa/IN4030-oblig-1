@@ -31,25 +31,33 @@ public class SearchEngine {
         /* We then insert-sort a[0..k-1] in descending order */
         Sorting.sortArrayDesc(searchResults, 0, k - 1);
 
-
         /* Compare lowest number with each element in the rest of the array*/
         Sorting.searchAndResort(0, k - 1, k, n, searchResults);
     }
 
     public void sortSearchResultsAsync(int[] searchResults, int k) {
-        Sorting.sortArrayDesc(searchResults, 0, k - 1);
-
         int numProcessors = Runtime.getRuntime().availableProcessors();
+        ThreadWorker[] tw = new ThreadWorker[numProcessors];
         Thread[] t = new Thread[numProcessors];
         int arrayElements = n - k - 1;
         int elementsPerProcessor = arrayElements / numProcessors;
 
-
+        //Create threads where all should do sorting for a given range of elements.
+        int readFrom;
+        int readTo;
         for (int i = 0; i < numProcessors; i++) {
-            t[i] = new Thread(new SorterThread(searchResults, k, k + elementsPerProcessor * i, elementsPerProcessor));
+            readFrom = elementsPerProcessor * i;
+            readTo = readFrom + elementsPerProcessor;
+            if (i == numProcessors - 1){
+                readTo = n;
+            }
+            tw[i] = new ThreadWorker(searchResults, k, readFrom, readTo - 1);
+            t[i] = new Thread(tw[i]);
             t[i].start();
+
         }
 
+        //Wait for threads to finish
         for (int i = 0; i < numProcessors; i++) {
             try {
                 t[i].join();
@@ -59,6 +67,12 @@ public class SearchEngine {
             }
         }
 
+        //All threads completed. Merge results for each sorting. Starting from thread 1, not 0 as thread 0 already has sorted it's elements from 0 to k
+        for (int i = 1; i < tw.length; i++) {
+            for (int j = tw[i].getStartIdx(); j < tw[i].getEndIdx() - 1; j++) {
+                Sorting.searchAndResort(0, k - 1, tw[i].getStartIdx(), tw[i].getStartIdx() + k - 1, searchResults);
+            }
+        }
     }
 
     public void generateSearchResults() {
