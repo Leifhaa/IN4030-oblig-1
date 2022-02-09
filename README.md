@@ -29,7 +29,7 @@ The method 'testSpeedComparison' the speed of each algorithm and prints out the 
 
 ## Task 2
 
-The tests in Tests_task1.cs demonstrates the async sorting method. The following table shows the timings when sorting asynchronously. (A1 is not included as there's no asynchronious option to sort this)
+The tests in Tests_task2.cs demonstrates the async sorting method. The following table shows the timings when sorting asynchronously. (A1 is not included as there's no asynchronous option to sort this)
 
 - Results for array size 1000: Time usage for different algorithms:  A2(K20) = 0.7923, A2(K100) = 0.6728
 - Results for array size 10000: Time usage for different algorithms:  A2(K20) = 0.6977, A2(K100) = 0.9869
@@ -72,4 +72,7 @@ It's possible to calculate the speedup by dividing the sequential algorithm's ex
 We can see that as the array size increases, we achieve a speedup which is > 1. It means that the paralell algorithm is more efficient to use as the array size increase.
 The reason the algorithm is slower for a lower array size is because there's costs in this algorithm with forinstance starting new threads which can be expensive when we're anyway dealing with small arrays.
 
-We also see that the execution time changes as the k value is changed. In the parallel algorithm it looks like the algorithm gets slower as the K increases. This is because we have larger arrays which has to be sorted and re-sorted.  We also see the similar tendencies in the sequential algorithm when changing the K number.in
+We also see that the execution time changes as the k value is changed. In the parallel algorithm it looks like the algorithm gets slower as the K increases. This is because we have larger arrays (a[0] to a[k - 1]) which has to be sorted and re-sorted.  We also see the similar tendencies in the sequential algorithm when changing the K number. There is however some times which we see that the K100 is faster than the K20. I belive this occurs due to other system events such as garbage collection, JIT compilation etc. In general looks like the K20 is faster than the K100 algorithm.
+
+
+It's also interesting noting that the paralell algorithm does most of the sorting in paralell, however there's still a requirement before the sorting begins with starting up threads to sort which is sequential. There's also a sequential part after the sorting is finished where the main threads collects and merges the results which each thread has sorted. So even though we've increased the speed of the algorithm, we dont achieve 8 times faster sorting (as I have 8 cores) due to these factors 
