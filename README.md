@@ -1,5 +1,5 @@
 # IN4030-oblig-1 
-### Tasks can be found here: https://www.uio.no/studier/emner/matnat/ifi/IN3030/v22/obligs/oblig1-2022-english.pdf
+### Tasks can be found in the resources folder
 
 ## Task 1
 The tests in class 'Tests_Task1' demonstrates the different values as described in task 1. It also contains other unit tests to ensure the implementation is correct.
@@ -24,7 +24,7 @@ The method 'testSpeedComparison' the speed of each algorithm and prints out the 
 |10000000   |11.7892     |  5.5203        |5.3735           |
 |100000000  |96.5663     |  56.3688       | 54.5405         |
 
-![alt text](./images/syncspeed.png)
+![alt text](resources/syncspeed.png)
 
 
 ## Task 2
@@ -48,7 +48,7 @@ The tests in Tests_task1.cs demonstrates the async sorting method. The following
 |10000000   | 2.798         |3.1326           |
 |100000000  | 14.7829       | 15.0821         |
 
-![alt text](./images/asyncspeed.png)
+![alt text](resources/asyncspeed.png)
 
 
 
@@ -72,4 +72,4 @@ It's possible to calculate the speedup by dividing the sequential algorithm's ex
 We can see that as the array size increases, we achieve a speedup which is > 1. It means that the paralell algorithm is more efficient to use as the array size increase.
 The reason the algorithm is slower for a lower array size is because there's costs in this algorithm with forinstance starting new threads which can be expensive when we're anyway dealing with small arrays.
 
-We also see that the execution time changes as the k value is changed. In the parallel algorithm it looks like the algorithm gets slower as the K increases. This is because we have larger arrays which has to be sorted and re-sorted.  We also see the similar tendencies in the sequential algorithm when changing the K number.
+We also see that the execution time changes as the k value is changed. In the parallel algorithm it looks like the algorithm gets slower as the K increases. This is because we have larger arrays which has to be sorted and re-sorted.  We also see the similar tendencies in the sequential algorithm when changing the K number.in
