@@ -74,5 +74,9 @@ The reason the algorithm is slower for a lower array size is because there's cos
 
 We also see that the execution time changes as the k value is changed. In the parallel algorithm it looks like the algorithm gets slower as the K increases. This is because we have larger arrays (a[0] to a[k - 1]) which has to be sorted and re-sorted.  We also see the similar tendencies in the sequential algorithm when changing the K number. There is however some times which we see that the K100 is faster than the K20. I belive this occurs due to other system events such as garbage collection, JIT compilation etc. In general looks like the K20 is faster than the K100 algorithm.
 
-
 It's also interesting noting that the paralell algorithm does most of the sorting in paralell, however there's still a requirement before the sorting begins with starting up threads to sort which is sequential. There's also a sequential part after the sorting is finished where the main threads collects and merges the results which each thread has sorted. So even though we've increased the speed of the algorithm, we dont achieve 8 times faster sorting (as I have 8 cores) due to these factors 
+
+
+#### Amdahl's law
+We can see how Amdahl's law is applied to this program. We do parallelize parts of the code which means that a part of the code is done faster, however we're not achieving the speed of sequential runtime speed x threads as not all of the code can be parallelized
+![alt text](resources/seq-vs-parallell.png)
